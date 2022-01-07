@@ -1,21 +1,43 @@
 {
   "env": {
-    "browser": false,
-    "es6": true,
-    "node": true
+    "browser": true,
+    "es2021": true
   },
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "tsconfig.json",
-    "sourceType": "module"
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "project": ["./tsconfig.eslint.json"]
   },
-  "plugins": ["@typescript-eslint", "jest"],
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:jest/recommended",
-    "prettier"
-  ],
-  "rules": {}
+  "plugins": ["@typescript-eslint", "prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "max-len": ["error", { "code": 100 }],
+    "@typescript-eslint/lines-between-class-members": [
+      "error",
+      "always",
+      { "exceptAfterSingleLine": true }
+    ],
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "no-void": ["error", { "allowAsStatement": true }],
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "no-console": ["error", { "allow": ["debug", "info", "warn", "error"] }],
+    "arrow-parens": ["error", "as-needed"],
+    "class-methods-use-this": "off",
+    "no-param-reassign": ["error", { "props": false }],
+    "@typescript-eslint/indent": "off",
+    "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"],
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "*", "next": "return" },
+      { "blankLine": "always", "prev": "*", "next": "block-like" },
+      { "blankLine": "always", "prev": "block-like", "next": "*" }
+    ]
+  }
 }
