@@ -23,6 +23,7 @@ jobs:
           --health-retries 5
     steps:
     - uses: actions/checkout@v2
+    - uses: volta-cli/action@v1
     - run: npm ci --no-audit
     - run: npm run lint --if-present
     - run: npm test
