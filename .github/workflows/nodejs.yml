@@ -8,7 +8,7 @@ jobs:
     container: node:10.18-jessie
     services:
       postgres:
-        image: postgres
+        image: postgres:11@sha256:85d79cba2d4942dad7c99f84ec389a5b9cc84fb07a3dcd3aff0fb06948cdc03b
         env:
           POSTGRES_PORT: ${{env.DB_TEST_PORT}}
           POSTGRES_HOST: ${{env.DB_TEST_HOST}}
