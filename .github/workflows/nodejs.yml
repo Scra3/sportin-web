@@ -12,6 +12,7 @@ jobs:
         env:
           POSTGRES_PORT: ${{env.DB_TEST_PORT}}
           POSTGRES_HOST: ${{env.DB_TEST_HOST}}
+          POSTGRES_PASSWORD: ${{env.DB_TEST_PASSWORD}}
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -25,3 +26,8 @@ jobs:
     - run: npm run build --if-present
       env:
         CI: true
+        DB_TEST_USER: ${{env.DB_TEST_USER}}
+        DB_TEST_PASSWORD: ${{env.DB_TEST_PASSWORD}}
+        DB_TEST_HOST: ${{env.DB_TEST_HOST}}
+        DB_TEST_PORT: ${{env.DB_TEST_PORT}}
+        DB_TEST_NAME: ${{env.DB_TEST_NAME}}
