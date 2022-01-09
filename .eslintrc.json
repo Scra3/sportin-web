@@ -17,6 +17,8 @@
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "strict": "error",
     "prettier/prettier": "error",
     "max-len": ["error", { "code": 100 }],
     "@typescript-eslint/lines-between-class-members": [
