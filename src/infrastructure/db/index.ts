@@ -21,7 +21,6 @@ export interface Repositories {
 
 export default class RepositoriesFactory {
   static async build(configuration: RepositoriesConfiguration): Promise<Repositories> {
-
     const { user, password, host, port, dbName, forceSync } = configuration;
     const sequelize = new Sequelize(`postgres://${user}:${password}@${host}:${port}/${dbName}`, {
       logging: false,
