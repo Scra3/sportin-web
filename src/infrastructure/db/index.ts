@@ -34,14 +34,7 @@ export default class RepositoriesFactory {
       temporaryAssociationRepository,
     });
 
-    await [temporaryAssociationRepository, temporaryUserRepository, associationRepository].reduce(
-      async (promise: Promise<unknown>, repo) => {
-        await promise;
-
-        return repo.model.sync({ force: forceSync, logging: false });
-      },
-      Promise.resolve(),
-    );
+    await sequelize.sync({ force: forceSync });
 
     return {
       db: sequelize,

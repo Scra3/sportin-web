@@ -8,10 +8,14 @@ jobs:
     container: node:16.13
     services:
       postgres:
-        image: postgres:11@sha256:85d79cba2d4942dad7c99f84ec389a5b9cc84fb07a3dcd3aff0fb06948cdc03b
+        image: postgres
         env:
-          POSTGRES_PORT: ${{env.DB_TEST_PORT}}
-          POSTGRES_PASSWORD: ${{env.DB_TEST_PASSWORD}}
+          POSTGRES_PORT: 5432
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+          POSTGRES_USER: postgres
+        ports:
+          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -22,11 +26,10 @@ jobs:
     - run: npm ci --no-audit
     - run: npm run lint --if-present
     - run: npm test
-    - run: npm run build --if-present
       env:
         CI: true
-        DB_TEST_USER: ${{env.DB_TEST_USER}}
-        DB_TEST_PASSWORD: ${{env.DB_TEST_PASSWORD}}
-        DB_TEST_HOST: ${{env.DB_TEST_HOST}}
-        DB_TEST_PORT: ${{env.DB_TEST_PORT}}
-        DB_TEST_NAME: ${{env.DB_TEST_NAME}}
+        DB_TEST_USER: postgres
+        DB_TEST_PASSWORD: postgres
+        DB_TEST_HOST: postgres
+        DB_TEST_PORT: 5432
+        DB_TEST_NAME: postgres
