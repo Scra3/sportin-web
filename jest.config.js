@@ -11,6 +11,7 @@ module.exports = {
     "json",
     "node",
   ],
+  testPathIgnorePatterns: ['utils.ts'],
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(ts|js)x?$',
   coverageDirectory: 'coverage',
   collectCoverageFrom: [
