@@ -18,8 +18,7 @@ describe('TemporaryUserRepository', () => {
       const user = new TemporaryUser('scra.gmail.com');
       const result = await repositories.temporaryUserRepository.create(user);
 
-      expect(result).toEqual(user);
-      expect(user.id).toBeDefined();
+      expect(result.id).toBeDefined();
     });
   });
 });

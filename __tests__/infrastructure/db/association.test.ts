@@ -24,8 +24,7 @@ describe('AssociationRepository', () => {
       );
       const createdAssociation = await repositories.associationRepository.create(association);
 
-      expect(createdAssociation).toEqual(association);
-      expect(association.id).toBeDefined();
+      expect(createdAssociation.id).toBeDefined();
     });
   });
 
@@ -41,7 +40,7 @@ describe('AssociationRepository', () => {
         'logo',
       );
       const createdAssociation = await repositories.associationRepository.create(association);
-      const foundAssociation = await repositories.associationRepository.findById(
+      const foundAssociation = await repositories.associationRepository.find(
         createdAssociation.id!,
       );
 

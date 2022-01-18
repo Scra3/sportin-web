@@ -7,7 +7,7 @@ export default class AssociationRepository extends Repository implements Associa
   constructor(sequelize: Sequelize) {
     super(sequelize);
 
-    this.model = this.sequelize.define('AssociationRepository', {
+    this.model = this.sequelize.define('Association', {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -57,8 +57,12 @@ export default class AssociationRepository extends Repository implements Associa
     );
   }
 
-  async findById(id: number): Promise<Association> {
+  async find(id: number): Promise<Association | null> {
     const asso: any = await this.model.findByPk(id);
+
+    if (!asso) {
+      return null;
+    }
 
     return new Association(
       asso.name,
@@ -72,7 +76,7 @@ export default class AssociationRepository extends Repository implements Associa
   }
 
   async create(association: Association): Promise<Association> {
-    const createdAssociation = await this.model.create({
+    const createdAssociation: any = await this.model.create({
       name: association.name,
       address: association.address,
       typeOfPractice: association.typeOfPractice,
@@ -80,10 +84,15 @@ export default class AssociationRepository extends Repository implements Associa
       contactDetails: association.contactDetails,
       logo: association.logo,
     });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    association.id = createdAssociation.id;
 
-    return association;
+    return new Association(
+      createdAssociation.name,
+      createdAssociation.address,
+      createdAssociation.typeOfPractice,
+      createdAssociation.description,
+      createdAssociation.contactDetails,
+      createdAssociation.id,
+      createdAssociation.logo,
+    );
   }
 }

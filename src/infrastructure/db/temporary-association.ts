@@ -3,6 +3,8 @@ import TemporaryAssociationRepositoryI from '../../boundaries/repositories/tempo
 import TemporaryAssociation from '../../domain/entities/temporary-association';
 import Repository from './repository';
 import AssociationRepository from './association';
+import TemporaryUserRepository from './temporary-user';
+import TemporaryUser from '../../domain/entities/temporary-user';
 
 export default class TemporaryAssociationRepository
   extends Repository
@@ -10,7 +12,10 @@ export default class TemporaryAssociationRepository
 {
   constructor(
     sequelize: Sequelize,
-    repositories: { associationRepository: AssociationRepository },
+    repositories: {
+      associationRepository: AssociationRepository;
+      temporaryUserRepository: TemporaryUserRepository;
+    },
   ) {
     super(sequelize, repositories);
 
@@ -46,22 +51,64 @@ export default class TemporaryAssociationRepository
       },
     });
 
-    this.model.belongsTo(repositories.associationRepository.model);
+    this.model.belongsTo(repositories.associationRepository.model, {
+      foreignKey: 'fromAssociationId',
+      foreignKeyConstraint: true,
+    });
+    this.model.belongsTo(repositories.temporaryUserRepository.model, {
+      foreignKey: 'fromUserId',
+      foreignKeyConstraint: true,
+    });
   }
 
-  async create(association: TemporaryAssociation): Promise<TemporaryAssociation> {
-    const createdAssociation = await this.model.create({
+  async create(
+    association: TemporaryAssociation,
+    user?: TemporaryUser,
+  ): Promise<TemporaryAssociation> {
+    const createdAssociation: any = await this.model.create({
       name: association.name,
       address: association.address,
       typeOfPractice: association.typeOfPractice,
       description: association.description,
       contactDetails: association.contactDetails,
       logo: association.logo,
+      fromUserId: user ? user.id : null,
     });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    association.id = createdAssociation.id;
 
-    return association;
+    return new TemporaryAssociation(
+      createdAssociation.name,
+      createdAssociation.address,
+      createdAssociation.typeOfPractice,
+      createdAssociation.description,
+      createdAssociation.contactDetails,
+      createdAssociation.logo,
+      createdAssociation.id,
+      createdAssociation.fromAssociationId,
+      createdAssociation.fromUserId,
+    );
+  }
+
+  async delete(id: number): Promise<void> {
+    await this.model.destroy({ where: { id } });
+  }
+
+  async find(id: number): Promise<TemporaryAssociation | null> {
+    const dbTempAssociation: any = await this.model.findByPk(id);
+
+    if (!dbTempAssociation) {
+      return null;
+    }
+
+    return new TemporaryAssociation(
+      dbTempAssociation.name,
+      dbTempAssociation.address,
+      dbTempAssociation.typeOfPractice,
+      dbTempAssociation.description,
+      dbTempAssociation.contactDetails,
+      dbTempAssociation.logo,
+      dbTempAssociation.id,
+      dbTempAssociation.fromAssociationId,
+      dbTempAssociation.fromUserId,
+    );
   }
 }
