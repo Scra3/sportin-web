@@ -27,6 +27,7 @@ export default class AssociationController implements AssociationControllerI {
     this.manageAssociations = new ManageAssociations(
       repositories.temporaryAssociationRepository,
       repositories.temporaryUserRepository,
+      repositories.associationRepository,
       mailProxy,
     );
 
@@ -39,6 +40,10 @@ export default class AssociationController implements AssociationControllerI {
 
   async update(data: DataUpdateCreateI) {
     await this.createOrUpdate(data);
+  }
+
+  async publish(temporaryAssociationId: number) {
+    await this.manageAssociations.publish(temporaryAssociationId);
   }
 
   async index(city: string, typeOfPractice: string): Promise<Array<Association>> {

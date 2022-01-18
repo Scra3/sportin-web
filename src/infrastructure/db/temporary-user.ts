@@ -2,17 +2,13 @@ import { DataTypes, Sequelize } from 'sequelize';
 import TemporaryUserRepositoryI from '../../boundaries/repositories/temporary-user';
 import TemporaryUser from '../../domain/entities/temporary-user';
 import Repository from './repository';
-import TemporaryAssociationRepository from './temporary-association';
 
 export default class TemporaryUserRepository
   extends Repository
   implements TemporaryUserRepositoryI
 {
-  constructor(
-    sequelize: Sequelize,
-    repositories: { temporaryAssociationRepository: TemporaryAssociationRepository },
-  ) {
-    super(sequelize, repositories);
+  constructor(sequelize: Sequelize) {
+    super(sequelize);
 
     this.model = this.sequelize.define('TemporaryUser', {
       id: {
@@ -25,18 +21,25 @@ export default class TemporaryUserRepository
         allowNull: false,
       },
     });
-
-    this.model.belongsTo(repositories.temporaryAssociationRepository.model, {
-      onDelete: 'cascade',
-    });
   }
 
   async create(user: TemporaryUser): Promise<TemporaryUser> {
-    const createdUser = await this.model.create({ email: user.email });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    user.id = createdUser.id;
+    const createdUser: any = await this.model.create({ email: user.email });
 
-    return user;
+    return new TemporaryUser(createdUser.email, createdUser.id);
+  }
+
+  async find(id: number): Promise<TemporaryUser | null> {
+    const user: any = await this.model.findByPk(id);
+
+    if (!user) {
+      return null;
+    }
+
+    return new TemporaryUser(user.email, user.id);
+  }
+
+  async delete(id: number): Promise<void> {
+    await this.model.destroy({ where: { id } });
   }
 }

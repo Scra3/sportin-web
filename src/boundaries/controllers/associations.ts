@@ -15,9 +15,9 @@ export interface DataUpdateCreateI {
     description: string;
     contactDetails: string;
     logo: string;
-    id?: string;
-    fromAssociationId?: string;
-    fromUserId?: string;
+    id?: number;
+    fromAssociationId?: number;
+    fromUserId?: number;
   };
   user?: {
     email: string;

@@ -13,6 +13,6 @@ export default class SearchAssociations {
   }
 
   async find(associationId: string): Promise<Association> {
-    return this.associationRepository.findById(associationId);
+    return this.associationRepository.find(associationId);
   }
 }

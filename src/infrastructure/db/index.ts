@@ -27,11 +27,10 @@ export default class RepositoriesFactory {
     });
 
     const associationRepository = new AssociationRepository(sequelize);
+    const temporaryUserRepository = new TemporaryUserRepository(sequelize);
     const temporaryAssociationRepository = new TemporaryAssociationRepository(sequelize, {
+      temporaryUserRepository,
       associationRepository,
-    });
-    const temporaryUserRepository = new TemporaryUserRepository(sequelize, {
-      temporaryAssociationRepository,
     });
 
     await sequelize.sync({ force: forceSync });
