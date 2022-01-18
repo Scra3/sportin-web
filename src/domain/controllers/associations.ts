@@ -42,7 +42,7 @@ export default class AssociationController implements AssociationControllerI {
     await this.createOrUpdate(data);
   }
 
-  async publish(temporaryAssociationId: number) {
+  async publish(temporaryAssociationId: number): Promise<void> {
     await this.manageAssociations.publish(temporaryAssociationId);
   }
 
@@ -50,7 +50,7 @@ export default class AssociationController implements AssociationControllerI {
     return this.searchAssociations.findAll(city, typeOfPractice);
   }
 
-  async show(id: string): Promise<Association> {
+  async show(id: number): Promise<Association | null> {
     return this.searchAssociations.find(id);
   }
 

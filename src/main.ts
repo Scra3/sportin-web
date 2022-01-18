@@ -1,3 +1,5 @@
-export default function hello(name: string): string {
-  return name;
-}
+import express from 'express';
+import Router from './infrastructure/http/router';
+
+const app = express();
+Router.run(app, 3000);

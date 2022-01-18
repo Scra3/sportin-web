@@ -12,7 +12,7 @@ export default class SearchAssociations {
     return this.associationRepository.findBy(city, typeOfPractice);
   }
 
-  async find(associationId: string): Promise<Association> {
+  async find(associationId: number): Promise<Association | null> {
     return this.associationRepository.find(associationId);
   }
 }
