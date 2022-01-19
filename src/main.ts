@@ -1,5 +1,9 @@
 import express from 'express';
+import dotenv from 'dotenv';
 import Router from './infrastructure/http/router';
 
+dotenv.config();
+
 const app = express();
-Router.run(app, 3000);
+
+new Router().init().then(router => router.run(app, 3000));

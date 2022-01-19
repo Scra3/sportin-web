@@ -1,6 +1,6 @@
 import TemporaryAssociation from '../../../src/domain/entities/temporary-association';
 import utils from '../../utils';
-import { Repositories } from '../../../src/infrastructure/db';
+import Repositories from '../../../src/boundaries/repositories';
 
 describe('TemporaryAssociationRepository', () => {
   let repositories: Repositories;

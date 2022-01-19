@@ -5,7 +5,6 @@ export interface AssociationControllerI {
   update(data: DataUpdateCreateI): Promise<void>;
   index(city: string, typeOfPractice: string): Promise<Array<Association>>;
   show(id: number): Promise<Association | null>;
-  publish(temporaryAssociationId: number): Promise<void>;
 }
 
 export interface DataUpdateCreateI {
