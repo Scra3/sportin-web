@@ -1,4 +1,5 @@
 import ManageAssociations from '../usecases/manage-associations';
+// eslint-disable-next-line max-len
 import { TemporaryAssociationControllerI } from '../../boundaries/controllers/temporary-associations';
 import SearchAssociations from '../usecases/search-associations';
 import Association from '../entities/association';

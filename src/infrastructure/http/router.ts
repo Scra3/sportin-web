@@ -1,7 +1,5 @@
 import * as core from 'express-serve-static-core';
-import { Response } from 'express-serve-static-core';
 import RepositoriesFactory from '../db';
-import HTTPCode from './types';
 import Repositories from '../../boundaries/repositories';
 import Controllers from '../../boundaries/controllers';
 import AssociationController from '../../domain/controllers/associations';
