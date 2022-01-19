@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize';
 import AssociationRepository from './association';
 import TemporaryAssociationRepository from './temporary-association';
 import TemporaryUserRepository from './temporary-user';
+import Repositories from '../../boundaries/repositories';
 
 export interface RepositoriesConfiguration {
   user: string;
@@ -10,13 +11,6 @@ export interface RepositoriesConfiguration {
   port: string;
   dbName: string;
   forceSync: boolean;
-}
-
-export interface Repositories {
-  db: Sequelize;
-  associationRepository: AssociationRepository;
-  temporaryAssociationRepository: TemporaryAssociationRepository;
-  temporaryUserRepository: TemporaryUserRepository;
 }
 
 export default class RepositoriesFactory {

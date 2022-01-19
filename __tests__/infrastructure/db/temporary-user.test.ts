@@ -1,6 +1,6 @@
 import TemporaryUser from '../../../src/domain/entities/temporary-user';
 import utils from '../../utils';
-import { Repositories } from '../../../src/infrastructure/db';
+import Repositories from '../../../src/boundaries/repositories';
 
 describe('TemporaryUserRepository', () => {
   let repositories: Repositories;

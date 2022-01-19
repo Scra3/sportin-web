@@ -4,7 +4,7 @@ export interface AssociationControllerI {
   create(data: DataUpdateCreateI): Promise<void>;
   update(data: DataUpdateCreateI): Promise<void>;
   index(city: string, typeOfPractice: string): Promise<Array<Association>>;
-  show(id: string): Promise<Association>;
+  show(id: number): Promise<Association | null>;
 }
 
 export interface DataUpdateCreateI {
