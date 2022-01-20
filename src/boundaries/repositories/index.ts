@@ -1,10 +1,10 @@
-import AssociationRepository from '../../infrastructure/db/association';
-import TemporaryAssociationRepository from '../../infrastructure/db/temporary-association';
-import TemporaryUserRepository from '../../infrastructure/db/temporary-user';
+import AssociationRepositoryI from './association';
+import TemporaryAssociationRepositoryI from './temporary-association';
+import TemporaryUserRepositoryI from './temporary-user';
 
-export default interface Repositories {
+export default interface RepositoriesI {
   db: { close: () => void };
-  associationRepository: AssociationRepository;
-  temporaryAssociationRepository: TemporaryAssociationRepository;
-  temporaryUserRepository: TemporaryUserRepository;
+  associationRepository: AssociationRepositoryI;
+  temporaryAssociationRepository: TemporaryAssociationRepositoryI;
+  temporaryUserRepository: TemporaryUserRepositoryI;
 }

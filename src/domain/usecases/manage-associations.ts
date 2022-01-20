@@ -4,7 +4,7 @@ import MailProxyI from '../../boundaries/proxies/mail';
 import TemporaryAssociationRepositoryI from '../../boundaries/repositories/temporary-association';
 import TemporaryAssociation from '../entities/temporary-association';
 import AssociationRepositoryI from '../../boundaries/repositories/association';
-import Repositories from '../../boundaries/repositories';
+import RepositoriesI from '../../boundaries/repositories';
 
 export default class ManageAssociations {
   private readonly temporaryAssociationRepository: TemporaryAssociationRepositoryI;
@@ -12,7 +12,7 @@ export default class ManageAssociations {
   private readonly associationRepository: AssociationRepositoryI;
   private readonly mailProxy: MailProxyI;
 
-  constructor(repositories: Repositories, mailProxy: MailProxyI) {
+  constructor(repositories: RepositoriesI, mailProxy: MailProxyI) {
     this.temporaryAssociationRepository = repositories.temporaryAssociationRepository;
     this.temporaryUserRepository = repositories.temporaryUserRepository;
     this.associationRepository = repositories.associationRepository;

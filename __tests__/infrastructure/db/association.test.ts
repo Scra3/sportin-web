@@ -1,9 +1,9 @@
 import Association from '../../../src/domain/entities/association';
 import utils from '../../utils';
-import Repositories from '../../../src/boundaries/repositories';
+import RepositoriesI from '../../../src/boundaries/repositories';
 
 describe('AssociationRepository', () => {
-  let repositories: Repositories;
+  let repositories: RepositoriesI;
 
   beforeEach(async () => {
     repositories = await utils.mountRepositories();

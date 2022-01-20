@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize';
 import AssociationRepository from './association';
 import TemporaryAssociationRepository from './temporary-association';
 import TemporaryUserRepository from './temporary-user';
-import Repositories from '../../boundaries/repositories';
+import RepositoriesI from '../../boundaries/repositories';
 
 export interface RepositoriesConfiguration {
   user: string;
@@ -14,7 +14,7 @@ export interface RepositoriesConfiguration {
 }
 
 export default class RepositoriesFactory {
-  static async build(configuration: RepositoriesConfiguration): Promise<Repositories> {
+  static async build(configuration: RepositoriesConfiguration): Promise<RepositoriesI> {
     const { user, password, host, port, dbName, forceSync } = configuration;
     const sequelize = new Sequelize(`postgres://${user}:${password}@${host}:${port}/${dbName}`, {
       logging: false,
