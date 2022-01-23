@@ -6,4 +6,4 @@ dotenv.config();
 
 const app = express();
 
-new Router().init().then(router => router.run(app, 3000));
+new Router().init().then(router => router.run(app, Number(process.env.PORT!)));

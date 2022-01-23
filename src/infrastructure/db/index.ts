@@ -31,6 +31,7 @@ export default class RepositoriesFactory {
 
     return {
       db: sequelize,
+      lib: Sequelize,
       associationRepository,
       temporaryAssociationRepository,
       temporaryUserRepository,
