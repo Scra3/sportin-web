@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 import RepositoriesFactory from '../src/infrastructure/db';
-import Repositories from '../src/boundaries/repositories';
+import RepositoriesI from '../src/boundaries/repositories';
 
-const mountRepositories = async (): Promise<Repositories> => {
+const mountRepositories = async (): Promise<RepositoriesI> => {
   dotenv.config();
 
   return RepositoriesFactory.build({

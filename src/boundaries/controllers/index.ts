@@ -1,7 +1,7 @@
-import AssociationController from '../../domain/controllers/associations';
-import TemporaryAssociationController from '../../domain/controllers/temporary-associations';
+import { AssociationControllerI } from './associations';
+import { TemporaryAssociationControllerI } from './temporary-associations';
 
-export default interface Controllers {
-  association: AssociationController;
-  temporaryAssociation: TemporaryAssociationController;
+export default interface ControllersI {
+  association: AssociationControllerI;
+  temporaryAssociation: TemporaryAssociationControllerI;
 }

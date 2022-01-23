@@ -8,13 +8,13 @@ import {
 import SearchAssociations from '../usecases/search-associations';
 import Association from '../entities/association';
 import MailProxyI from '../../boundaries/proxies/mail';
-import Repositories from '../../boundaries/repositories';
+import RepositoriesI from '../../boundaries/repositories';
 
 export default class AssociationController implements AssociationControllerI {
   private readonly manageAssociations: ManageAssociations;
   private readonly searchAssociations: SearchAssociations;
 
-  constructor(repositories: Repositories, mailProxy: MailProxyI) {
+  constructor(repositories: RepositoriesI, mailProxy: MailProxyI) {
     this.manageAssociations = new ManageAssociations(repositories, mailProxy);
     this.searchAssociations = new SearchAssociations(repositories);
   }

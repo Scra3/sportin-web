@@ -1,7 +1,7 @@
 import * as core from 'express-serve-static-core';
 import RepositoriesFactory from '../db';
-import Repositories from '../../boundaries/repositories';
-import Controllers from '../../boundaries/controllers';
+import RepositoriesI from '../../boundaries/repositories';
+import ControllersI from '../../boundaries/controllers';
 import AssociationController from '../../domain/controllers/associations';
 import MailProxy from '../mail';
 import TemporaryAssociationController from '../../domain/controllers/temporary-associations';
@@ -9,8 +9,8 @@ import TemporaryAssociationRoutes from './temporary-association';
 import AssociationRoutes from './association';
 
 export default class Router {
-  private repositories!: Repositories;
-  private controllers!: Controllers;
+  private repositories!: RepositoriesI;
+  private controllers!: ControllersI;
 
   async init() {
     this.repositories = await RepositoriesFactory.build({

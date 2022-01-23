@@ -1,9 +1,9 @@
 import TemporaryUser from '../../../src/domain/entities/temporary-user';
 import utils from '../../utils';
-import Repositories from '../../../src/boundaries/repositories';
+import RepositoriesI from '../../../src/boundaries/repositories';
 
 describe('TemporaryUserRepository', () => {
-  let repositories: Repositories;
+  let repositories: RepositoriesI;
 
   beforeEach(async () => {
     repositories = await utils.mountRepositories();
