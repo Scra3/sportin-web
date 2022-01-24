@@ -1,5 +1,4 @@
 import { Express } from 'express';
-// import { PermissionMiddlewareCreator } from 'forest-express-sequelize';
 import {
   PermissionMiddlewareCreator,
   RecordsGetter,
@@ -21,7 +20,7 @@ export default class TemporaryAssociationRoutes extends Routes {
       if (association) {
         Routes.buildResponse(res, HTTPCode.Ok, 'Unpublished association is found', association);
       } else {
-        Routes.buildResponse(res, HTTPCode.NotFound, 'Association not found');
+        Routes.buildResponse(res, HTTPCode.NotFound, 'Unpublished association not found');
       }
     });
 
