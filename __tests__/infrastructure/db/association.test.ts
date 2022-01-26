@@ -14,7 +14,7 @@ describe('AssociationRepository', () => {
   });
 
   describe('create', () => {
-    it('should create a temporary association and returns it with an id', async () => {
+    it('should create an association and returns it with an id', async () => {
       const association = new Association(
         'pompignac',
         'an address',
@@ -28,7 +28,25 @@ describe('AssociationRepository', () => {
     });
   });
 
-  describe('findById', () => {
+  describe('update', () => {
+    it('should update the association', async () => {
+      const association = new Association(
+        'pompignac',
+        'an address',
+        'basket',
+        'a description',
+        'a contact details',
+      );
+      const createdAssociation = await repositories.associationRepository.create(association);
+
+      createdAssociation.name = 'new name to update';
+      await repositories.associationRepository.update(createdAssociation);
+      const updatedAsso = await repositories.associationRepository.find(createdAssociation.id!);
+      expect(updatedAsso!.name).toEqual('new name to update');
+    });
+  });
+
+  describe('find', () => {
     it('should find the created record', async () => {
       const association = new Association(
         'pompignac',

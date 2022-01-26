@@ -28,7 +28,14 @@ export default class ManageAssociations {
       await this.mailProxy.send(user.email, 'Votre modification nous a bien été envoyé.');
     }
 
-    await this.temporaryAssociationRepository.create(association);
+    if (
+      association.fromAssociationId &&
+      (await this.associationRepository.find(association.fromAssociationId))
+    ) {
+      await this.associationRepository.update(association);
+    } else {
+      await this.associationRepository.create(association);
+    }
   }
 
   async publish(temporaryAssociationId: number): Promise<void> {
@@ -44,6 +51,6 @@ export default class ManageAssociations {
       await this.temporaryUserRepository.delete(temporaryAssociation.fromUserId);
     }
 
-    await this.associationRepository.create(temporaryAssociation);
+    await this.updateOrCreateAssociation(temporaryAssociation);
   }
 }
