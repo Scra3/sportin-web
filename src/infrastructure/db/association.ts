@@ -95,4 +95,10 @@ export default class AssociationRepository extends Repository implements Associa
       createdAssociation.logo,
     );
   }
+
+  async update(association: Association): Promise<void> {
+    await this.model.update(association, {
+      where: { id: association.id },
+    });
+  }
 }
